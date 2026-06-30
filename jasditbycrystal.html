@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jasdit by crystal — Aesthetic Self-Improvement & Edit Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti for fun interaction -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+        }
+        .font-playful {
+            font-family: 'Fredoka', sans-serif;
+        }
+        /* Custom dynamic scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8D8C8;
+            border-radius: 10px;
+        }
+        /* Soft pulsing animation */
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .pulse-card {
+            animation: gentle-pulse 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex justify-center items-start p-4 sm:p-6 md:p-8 text-[#2D2727]">
+
+    <!-- Main Container (Aesthetic Card Mobile-first Size) -->
+    <main class="w-full max-w-md bg-[#FFFDF9] border-4 border-[#2D2727] rounded-[40px] shadow-[8px_8px_0px_0px_#2D2727] overflow-hidden flex flex-col relative transition-all duration-300">
+        
+        <!-- Decorative Top Bar -->
+        <div class="bg-[#FFE3E3] border-b-4 border-[#2D2727] py-3 px-6 flex justify-between items-center">
+            <div class="flex space-x-2">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#FF7B7B] border-2 border-[#2D2727]"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-[#FFD384] border-2 border-[#2D2727]"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-[#9BE8C4] border-2 border-[#2D2727]"></span>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-[#2D2727] font-playful">★ online catalog ★</div>
+        </div>
+
+        <!-- Scrollable Body Content -->
+        <div class="p-6 space-y-6">
+            
+            <!-- Greeting & Header (Dynamic time-based greeting) -->
+            <section class="text-center space-y-3">
+                <div class="relative inline-block">
+                    <!-- Profile Mascot / Custom Badge -->
+                    <div class="w-24 h-24 mx-auto rounded-full bg-[#C3ACD0] border-4 border-[#2D2727] flex items-center justify-center overflow-hidden shadow-[4px_4px_0px_0px_#2D2727]">
+                        <!-- Cute Hand-drawn Smile SVG -->
+                        <svg class="w-16 h-16 text-[#2D2727]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <span class="absolute bottom-0 right-1/3 transform translate-x-6 bg-[#FFF2CC] border-2 border-[#2D2727] px-2 py-0.5 rounded-full text-xs font-bold font-playful shadow-[2px_2px_0px_0px_#2D2727]">Hi! ✨</span>
+                </div>
+
+                <div class="space-y-1">
+                    <h1 class="text-3xl font-extrabold font-playful text-[#2D2727] tracking-tight">jasdit by crystal</h1>
+                    <p class="text-sm font-medium text-gray-600 italic">"elevate your digital vibes and daily habits"</p>
+                </div>
+
+                <!-- Custom Dynamic Welcome Card -->
+                <div id="greeting-box" class="bg-[#FFF4F4] border-3 border-[#2D2727] rounded-3xl p-4 shadow-[4px_4px_0px_0px_#2D2727] text-left transition-all duration-300">
+                    <h3 class="font-bold text-base text-[#2D2727] flex items-center gap-2">
+                        <span id="time-emoji">✨</span> <span id="time-greeting">Selamat Datang!</span>
+                    </h3>
+                    <p class="text-xs text-gray-600 mt-1">Siap untuk upgrade visual & rutinitas harianmu jadi lebih aesthetic dan tertata bersama Crystal? Let's start!</p>
+                </div>
+            </section>
+
+            <!-- Playful Feature: Daily Mood Tracker (Aesthetic Self-Improvement vibe) -->
+            <section class="space-y-3">
+                <h2 class="text-lg font-extrabold font-playful flex items-center gap-2 text-[#2D2727]">
+                    <span>🎯</span> Mood Tracker Hari Ini
+                </h2>
+                <div class="bg-[#E2F6CA] border-3 border-[#2D2727] rounded-3xl p-4 shadow-[4px_4px_0px_0px_#2D2727] text-center">
+                    <p class="text-xs font-bold text-gray-700 mb-3 uppercase tracking-wider">Bagaimana perasaanmu sekarang?</p>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button onclick="setMood('happy', 'Awesome! Pertahankan energi positifmu hari ini! ✨')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🥳</button>
+                        <button onclick="setMood('chill', 'Santai saja... Segala hal baik butuh waktu 🍃')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">😎</button>
+                        <button onclick="setMood('tired', 'Lelah ya? Istirahat sejenak dan minum air hangat ☕')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🥱</button>
+                        <button onclick="setMood('sad', 'Tidak apa-apa untuk merasa sedih. Kamu hebat sudah bertahan! ❤️')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🥺</button>
+                        <button onclick="setMood('focus', 'Fokus mode: ON! Mari selesaikan rencana hari ini! 🔥')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🎯</button>
+                    </div>
+                    <div id="mood-feedback" class="mt-3 p-2 bg-white/70 border-2 border-dashed border-[#2D2727] rounded-xl text-xs font-medium text-gray-700 min-h-[36px] flex items-center justify-center">
+                        Pilih emoji di atas untuk mencatat mood hari ini!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Jasa Checklist (The "Habit" style selector for custom orders) -->
+            <section class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-extrabold font-playful flex items-center gap-2 text-[#2D2727]">
+                        <span>🚀</span> Jasa Edit & Layanan
+                    </h2>
+                    <span class="text-xs bg-[#FFD384] px-2 py-0.5 rounded-full border-2 border-[#2D2727] font-bold">Interactive</span>
+                </div>
+                
+                <p class="text-xs text-gray-500 italic -mt-1">Pilih layanan yang kamu inginkan, lalu klik tombol kirim di bawah!</p>
+
+                <div class="space-y-2.5">
+                    <!-- Service 1 -->
+                    <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="Aesthetic Photo Editing" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="updateServiceSelection()">
+                            <div class="text-left">
+                                <span class="font-bold text-sm block text-[#2D2727]">Aesthetic Photo Editing</span>
+                                <span class="text-[10px] text-gray-500">Filter tone, retouch, custom background</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold font-playful text-[#FF7B7B]">✨ Best</span>
+                    </label>
+
+                    <!-- Service 2 -->
+                    <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="Manips Lucu" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="updateServiceSelection()">
+                            <div class="text-left">
+                                <span class="font-bold text-sm block text-[#2D2727]">Manips Lucu</span>
+                                <span class="text-[10px] text-gray-500">Edit foto manipulasi imut/lucu bareng bias</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold font-playful text-blue-500">💖 Cute</span>
+                    </label>
+
+                    <!-- Service 3 -->
+                    <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="CV Frame" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="updateServiceSelection()">
+                            <div class="text-left">
+                                <span class="font-bold text-sm block text-[#2D2727]">CV Frame</span>
+                                <span class="text-[10px] text-gray-500">Aesthetic layout & frame CV profesional</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold font-playful text-emerald-500">📝 Clean</span>
+                    </label>
+
+                    <!-- Service 4 (Interactive Custom Request) -->
+                    <div class="space-y-2">
+                        <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                            <div class="flex items-center space-x-3">
+                                <input id="custom-service-check" type="checkbox" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="toggleCustomInput(); updateServiceSelection();">
+                                <div class="text-left">
+                                    <span class="font-bold text-sm block text-[#2D2727]">Tidak ada pilihan disini? Klik yang ini!</span>
+                                    <span class="text-[10px] text-gray-500">Tuliskan kebutuhan edit kustom spesial Anda</span>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold font-playful text-purple-500">✏️ Custom</span>
+                        </label>
+                        <div id="custom-input-container" class="hidden transition-all duration-300">
+                            <textarea id="custom-service-text" placeholder="Tuliskan detail request jasamu disini..." class="w-full p-3 border-3 border-[#2D2727] rounded-2xl bg-[#FFFDF4] text-sm focus:outline-none focus:ring-2 focus:ring-[#C3ACD0] placeholder-gray-400" rows="2" oninput="updateServiceSelection()"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom WhatsApp Order Button triggered by checklists -->
+                <div class="pt-2">
+                    <button id="wa-order-btn" onclick="sendCustomOrder()" class="w-full py-4 px-6 bg-[#C3ACD0] hover:bg-[#DBCBE3] border-3 border-[#2D2727] rounded-2xl font-bold text-sm text-[#2D2727] shadow-[4px_4px_0px_0px_#2D2727] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_#2D2727] active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <span>💬</span> Chat Order via WhatsApp (<span id="checked-count">0</span>)
+                    </button>
+                </div>
+            </section>
+
+            <!-- Private Chat Info Section (Redirects to WhatsApp) -->
+            <section class="pt-1">
+                <a href="https://wa.me/6283169968186?text=halo%20crystal!%20mau%20beli%20jasdit%20dong!%20mau%20request%20bisa%3F%20berapa%20pricelist%20nya%3F%20%F0%9F%92%95" target="_blank" rel="noopener" class="block p-4 bg-[#FFF5D6] hover:bg-[#FFEBB2] border-3 border-[#2D2727] rounded-3xl shadow-[4px_4px_0px_0px_#2D2727] active:scale-[0.98] transition-all flex items-center justify-between group">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">🔒</div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-sm text-[#2D2727]">Private Chat di WhatsApp</h4>
+                            <p class="text-[10px] text-gray-600">Konsultasi langsung, request khusus, dan tanya-tanya</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold bg-[#FF7B7B] text-white border-2 border-[#2D2727] px-2 py-1 rounded-lg group-hover:bg-[#FFD384] group-hover:text-[#2D2727] transition-all">Chat Sini →</span>
+                </a>
+            </section>
+
+            <!-- Social Media Hub Links Section (Clean & Catchy) -->
+            <section class="space-y-3 pt-2">
+                <h2 class="text-lg font-extrabold font-playful flex items-center gap-2 text-[#2D2727]">
+                    <span>📱</span> Crystal's Social Hub
+                </h2>
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/6283169968186" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-[#EAF7FF] hover:bg-[#D4F0FF] border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#2D2727] transition-all group">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white border-2 border-[#2D2727] rounded-xl flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_#2D2727]">
+                                🟢
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-[#2D2727] block">WhatsApp</span>
+                                <span class="text-xs text-gray-500">0831-6996-8186</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-white px-2 py-1 rounded-lg border-2 border-[#2D2727] group-hover:bg-[#FFD384] transition-all">Chat →</span>
+                    </a>
+
+                    <!-- Telegram Link -->
+                    <a href="https://t.me/Arabellacrsyt" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-[#F5ECFF] hover:bg-[#EAD6FF] border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#2D2727] transition-all group">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white border-2 border-[#2D2727] rounded-xl flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_#2D2727]">
+                                🔵
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-[#2D2727] block">Telegram</span>
+                                <span class="text-xs text-gray-500">@Arabellacrsyt</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-white px-2 py-1 rounded-lg border-2 border-[#2D2727] group-hover:bg-[#FFD384] transition-all">Join →</span>
+                    </a>
+
+                    <!-- TikTok Link -->
+                    <a href="https://www.tiktok.com/@jasdit.by.crystal" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-[#FFF0F5] hover:bg-[#FFE0EB] border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#2D2727] transition-all group">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white border-2 border-[#2D2727] rounded-xl flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_#2D2727]">
+                                ⚫
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-[#2D2727] block">TikTok</span>
+                                <span class="text-xs text-gray-500">@jasdit.by.crystal</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-white px-2 py-1 rounded-lg border-2 border-[#2D2727] group-hover:bg-[#FFD384] transition-all">Watch →</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer Area -->
+        <footer class="bg-[#2D2727] text-white text-center py-6 px-4 mt-auto space-y-2">
+            <p class="text-xs font-medium tracking-wide">
+                © All Right Reserved by <span class="font-bold text-[#FFD384]">Crystal Arabella</span>
+            </p>
+            <div class="inline-flex items-center gap-1.5 bg-[#403B3B] px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-extrabold text-[#9BE8C4]">
+                <span class="w-2 h-2 rounded-full bg-[#9BE8C4] animate-ping"></span>
+                payment all qris
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Set dynamic welcoming based on time
+        window.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting = 'Selamat Datang!';
+            let emoji = '✨';
+
+            if (hours >= 5 && hours < 11) {
+                greeting = 'Good Morning!';
+                emoji = '🌅';
+            } else if (hours >= 11 && hours < 15) {
+                greeting = 'Good Afternoon!';
+                emoji = '☀️';
+            } else if (hours >= 15 && hours < 19) {
+                greeting = 'Good Evening!';
+                emoji = '🌇';
+            } else {
+                greeting = 'Good Night!';
+                emoji = '🌙';
+            }
+
+            document.getElementById('time-greeting').innerText = greeting;
+            document.getElementById('time-emoji').innerText = emoji;
+        });
+
+        // Interactive mood tracker feedback
+        function setMood(mood, feedbackText) {
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.style.transform = 'scale(1)';
+                btn.sty<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jasdit by crystal — Aesthetic Self-Improvement & Edit Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti for fun interaction -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+        }
+        .font-playful {
+            font-family: 'Fredoka', sans-serif;
+        }
+        /* Custom dynamic scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8D8C8;
+            border-radius: 10px;
+        }
+        /* Soft pulsing animation */
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .pulse-card {
+            animation: gentle-pulse 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex justify-center items-start p-4 sm:p-6 md:p-8 text-[#2D2727]">
+
+    <!-- Main Container (Aesthetic Card Mobile-first Size) -->
+    <main class="w-full max-w-md bg-[#FFFDF9] border-4 border-[#2D2727] rounded-[40px] shadow-[8px_8px_0px_0px_#2D2727] overflow-hidden flex flex-col relative transition-all duration-300">
+        
+        <!-- Decorative Top Bar -->
+        <div class="bg-[#FFE3E3] border-b-4 border-[#2D2727] py-3 px-6 flex justify-between items-center">
+            <div class="flex space-x-2">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#FF7B7B] border-2 border-[#2D2727]"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-[#FFD384] border-2 border-[#2D2727]"></span>
+                <span class="w-3.5 h-3.5 rounded-full bg-[#9BE8C4] border-2 border-[#2D2727]"></span>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-[#2D2727] font-playful">★ online catalog ★</div>
+        </div>
+
+        <!-- Scrollable Body Content -->
+        <div class="p-6 space-y-6">
+            
+            <!-- Greeting & Header (Dynamic time-based greeting) -->
+            <section class="text-center space-y-3">
+                <div class="relative inline-block">
+                    <!-- Profile Mascot / Custom Badge -->
+                    <div class="w-24 h-24 mx-auto rounded-full bg-[#C3ACD0] border-4 border-[#2D2727] flex items-center justify-center overflow-hidden shadow-[4px_4px_0px_0px_#2D2727]">
+                        <!-- Cute Hand-drawn Smile SVG -->
+                        <svg class="w-16 h-16 text-[#2D2727]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <span class="absolute bottom-0 right-1/3 transform translate-x-6 bg-[#FFF2CC] border-2 border-[#2D2727] px-2 py-0.5 rounded-full text-xs font-bold font-playful shadow-[2px_2px_0px_0px_#2D2727]">Hi! ✨</span>
+                </div>
+
+                <div class="space-y-1">
+                    <h1 class="text-3xl font-extrabold font-playful text-[#2D2727] tracking-tight">jasdit by crystal</h1>
+                    <p class="text-sm font-medium text-gray-600 italic">"elevate your digital vibes and daily habits"</p>
+                </div>
+
+                <!-- Custom Dynamic Welcome Card -->
+                <div id="greeting-box" class="bg-[#FFF4F4] border-3 border-[#2D2727] rounded-3xl p-4 shadow-[4px_4px_0px_0px_#2D2727] text-left transition-all duration-300">
+                    <h3 class="font-bold text-base text-[#2D2727] flex items-center gap-2">
+                        <span id="time-emoji">✨</span> <span id="time-greeting">Selamat Datang!</span>
+                    </h3>
+                    <p class="text-xs text-gray-600 mt-1">Siap untuk upgrade visual & rutinitas harianmu jadi lebih aesthetic dan tertata bersama Crystal? Let's start!</p>
+                </div>
+            </section>
+
+            <!-- Playful Feature: Daily Mood Tracker (Aesthetic Self-Improvement vibe) -->
+            <section class="space-y-3">
+                <h2 class="text-lg font-extrabold font-playful flex items-center gap-2 text-[#2D2727]">
+                    <span>🎯</span> Mood Tracker Hari Ini
+                </h2>
+                <div class="bg-[#E2F6CA] border-3 border-[#2D2727] rounded-3xl p-4 shadow-[4px_4px_0px_0px_#2D2727] text-center">
+                    <p class="text-xs font-bold text-gray-700 mb-3 uppercase tracking-wider">Bagaimana perasaanmu sekarang?</p>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button onclick="setMood('happy', 'Awesome! Pertahankan energi positifmu hari ini! ✨')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🥳</button>
+                        <button onclick="setMood('chill', 'Santai saja... Segala hal baik butuh waktu 🍃')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">😎</button>
+                        <button onclick="setMood('tired', 'Lelah ya? Istirahat sejenak dan minum air hangat ☕')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🥱</button>
+                        <button onclick="setMood('sad', 'Tidak apa-apa untuk merasa sedih. Kamu hebat sudah bertahan! ❤️')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🥺</button>
+                        <button onclick="setMood('focus', 'Fokus mode: ON! Mari selesaikan rencana hari ini! 🔥')" class="mood-btn p-2 rounded-xl border-2 border-[#2D2727] bg-white hover:bg-[#FFF5B7] active:scale-95 transition-all text-xl">🎯</button>
+                    </div>
+                    <div id="mood-feedback" class="mt-3 p-2 bg-white/70 border-2 border-dashed border-[#2D2727] rounded-xl text-xs font-medium text-gray-700 min-h-[36px] flex items-center justify-center">
+                        Pilih emoji di atas untuk mencatat mood hari ini!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Jasa Checklist (The "Habit" style selector for custom orders) -->
+            <section class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-extrabold font-playful flex items-center gap-2 text-[#2D2727]">
+                        <span>🚀</span> Jasa Edit & Layanan
+                    </h2>
+                    <span class="text-xs bg-[#FFD384] px-2 py-0.5 rounded-full border-2 border-[#2D2727] font-bold">Interactive</span>
+                </div>
+                
+                <p class="text-xs text-gray-500 italic -mt-1">Pilih layanan yang kamu inginkan, lalu klik tombol kirim di bawah!</p>
+
+                <div class="space-y-2.5">
+                    <!-- Service 1 -->
+                    <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="Aesthetic Photo Editing" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="updateServiceSelection()">
+                            <div class="text-left">
+                                <span class="font-bold text-sm block text-[#2D2727]">Aesthetic Photo Editing</span>
+                                <span class="text-[10px] text-gray-500">Filter tone, retouch, custom background</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold font-playful text-[#FF7B7B]">✨ Best</span>
+                    </label>
+
+                    <!-- Service 2 -->
+                    <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="Manips Lucu" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="updateServiceSelection()">
+                            <div class="text-left">
+                                <span class="font-bold text-sm block text-[#2D2727]">Manips Lucu</span>
+                                <span class="text-[10px] text-gray-500">Edit foto manipulasi imut/lucu bareng bias</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold font-playful text-blue-500">💖 Cute</span>
+                    </label>
+
+                    <!-- Service 3 -->
+                    <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="CV Frame" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="updateServiceSelection()">
+                            <div class="text-left">
+                                <span class="font-bold text-sm block text-[#2D2727]">CV Frame</span>
+                                <span class="text-[10px] text-gray-500">Aesthetic layout & frame CV profesional</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold font-playful text-emerald-500">📝 Clean</span>
+                    </label>
+
+                    <!-- Service 4 (Interactive Custom Request) -->
+                    <div class="space-y-2">
+                        <label class="flex items-center justify-between p-3.5 bg-white border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] cursor-pointer hover:bg-[#FFFDF4] transition-all">
+                            <div class="flex items-center space-x-3">
+                                <input id="custom-service-check" type="checkbox" class="service-check w-5 h-5 rounded-md accent-[#C3ACD0] border-2 border-[#2D2727]" onchange="toggleCustomInput(); updateServiceSelection();">
+                                <div class="text-left">
+                                    <span class="font-bold text-sm block text-[#2D2727]">Tidak ada pilihan disini? Klik yang ini!</span>
+                                    <span class="text-[10px] text-gray-500">Tuliskan kebutuhan edit kustom spesial Anda</span>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold font-playful text-purple-500">✏️ Custom</span>
+                        </label>
+                        <div id="custom-input-container" class="hidden transition-all duration-300">
+                            <textarea id="custom-service-text" placeholder="Tuliskan detail request jasamu disini..." class="w-full p-3 border-3 border-[#2D2727] rounded-2xl bg-[#FFFDF4] text-sm focus:outline-none focus:ring-2 focus:ring-[#C3ACD0] placeholder-gray-400" rows="2" oninput="updateServiceSelection()"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom WhatsApp Order Button triggered by checklists -->
+                <div class="pt-2">
+                    <button id="wa-order-btn" onclick="sendCustomOrder()" class="w-full py-4 px-6 bg-[#C3ACD0] hover:bg-[#DBCBE3] border-3 border-[#2D2727] rounded-2xl font-bold text-sm text-[#2D2727] shadow-[4px_4px_0px_0px_#2D2727] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_#2D2727] active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <span>💬</span> Chat Order via WhatsApp (<span id="checked-count">0</span>)
+                    </button>
+                </div>
+            </section>
+
+            <!-- Private Chat Info Section (Redirects to WhatsApp) -->
+            <section class="pt-1">
+                <a href="https://wa.me/6283169968186?text=halo%20crystal!%20mau%20beli%20jasdit%20dong!%20mau%20request%20bisa%3F%20berapa%20pricelist%20nya%3F%20%F0%9F%92%95" target="_blank" rel="noopener" class="block p-4 bg-[#FFF5D6] hover:bg-[#FFEBB2] border-3 border-[#2D2727] rounded-3xl shadow-[4px_4px_0px_0px_#2D2727] active:scale-[0.98] transition-all flex items-center justify-between group">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">🔒</div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-sm text-[#2D2727]">Private Chat di WhatsApp</h4>
+                            <p class="text-[10px] text-gray-600">Konsultasi langsung, request khusus, dan tanya-tanya</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold bg-[#FF7B7B] text-white border-2 border-[#2D2727] px-2 py-1 rounded-lg group-hover:bg-[#FFD384] group-hover:text-[#2D2727] transition-all">Chat Sini →</span>
+                </a>
+            </section>
+
+            <!-- Social Media Hub Links Section (Clean & Catchy) -->
+            <section class="space-y-3 pt-2">
+                <h2 class="text-lg font-extrabold font-playful flex items-center gap-2 text-[#2D2727]">
+                    <span>📱</span> Crystal's Social Hub
+                </h2>
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/6283169968186" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-[#EAF7FF] hover:bg-[#D4F0FF] border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#2D2727] transition-all group">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white border-2 border-[#2D2727] rounded-xl flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_#2D2727]">
+                                🟢
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-[#2D2727] block">WhatsApp</span>
+                                <span class="text-xs text-gray-500">0831-6996-8186</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-white px-2 py-1 rounded-lg border-2 border-[#2D2727] group-hover:bg-[#FFD384] transition-all">Chat →</span>
+                    </a>
+
+                    <!-- Telegram Link -->
+                    <a href="https://t.me/Arabellacrsyt" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-[#F5ECFF] hover:bg-[#EAD6FF] border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#2D2727] transition-all group">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white border-2 border-[#2D2727] rounded-xl flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_#2D2727]">
+                                🔵
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-[#2D2727] block">Telegram</span>
+                                <span class="text-xs text-gray-500">@Arabellacrsyt</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-white px-2 py-1 rounded-lg border-2 border-[#2D2727] group-hover:bg-[#FFD384] transition-all">Join →</span>
+                    </a>
+
+                    <!-- TikTok Link -->
+                    <a href="https://www.tiktok.com/@jasdit.by.crystal" target="_blank" rel="noopener" class="flex items-center justify-between p-4 bg-[#FFF0F5] hover:bg-[#FFE0EB] border-3 border-[#2D2727] rounded-2xl shadow-[3px_3px_0px_0px_#2D2727] active:translate-y-0.5 active:shadow-[1px_1px_0px_0px_#2D2727] transition-all group">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white border-2 border-[#2D2727] rounded-xl flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_#2D2727]">
+                                ⚫
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-[#2D2727] block">TikTok</span>
+                                <span class="text-xs text-gray-500">@jasdit.by.crystal</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-white px-2 py-1 rounded-lg border-2 border-[#2D2727] group-hover:bg-[#FFD384] transition-all">Watch →</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer Area -->
+        <footer class="bg-[#2D2727] text-white text-center py-6 px-4 mt-auto space-y-2">
+            <p class="text-xs font-medium tracking-wide">
+                © All Right Reserved by <span class="font-bold text-[#FFD384]">Crystal Arabella</span>
+            </p>
+            <div class="inline-flex items-center gap-1.5 bg-[#403B3B] px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-extrabold text-[#9BE8C4]">
+                <span class="w-2 h-2 rounded-full bg-[#9BE8C4] animate-ping"></span>
+                payment all qris
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Set dynamic welcoming based on time
+        window.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting = 'Selamat Datang!';
+            let emoji = '✨';
+
+            if (hours >= 5 && hours < 11) {
+                greeting = 'Good Morning!';
+                emoji = '🌅';
+            } else if (hours >= 11 && hours < 15) {
+                greeting = 'Good Afternoon!';
+                emoji = '☀️';
+            } else if (hours >= 15 && hours < 19) {
+                greeting = 'Good Evening!';
+                emoji = '🌇';
+            } else {
+                greeting = 'Good Night!';
+                emoji = '🌙';
+            }
+
+            document.getElementById('time-greeting').innerText = greeting;
+            document.getElementById('time-emoji').innerText = emoji;
+        });
+
+        // Interactive mood tracker feedback
+        function setMood(mood, feedbackText) {
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.style.transform = 'scale(1)';
+                btn.sty
